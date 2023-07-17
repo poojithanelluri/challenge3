@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge 3</title>
+</head>
+<body>
+    <h1>Challenge 3</h1>
+    <script>
+        function getUniqueEntriesWithOldest(objArray) {
+  const uniqueMarks = {};
+  const resultArray = [];
+
+  for (const entry of objArray) {
+    const mark = entry.mark;
+    if (!uniqueMarks.hasOwnProperty(mark)) {
+      // If the mark is not already in the uniqueMarks object, add the entry
+      uniqueMarks[mark] = entry;
+    } else {
+      // If the mark is already in the uniqueMarks object, compare the dates
+      const existingEntry = uniqueMarks[mark];
+      if (entry.date < existingEntry.date) {
+        // If the new entry is older, replace the existing entry with the new one
+        uniqueMarks[mark] = entry;
+      }
+    }
+  }
+
+  // Convert the uniqueMarks object to an array and return it
+  for (const mark in uniqueMarks) {
+    resultArray.push(uniqueMarks[mark]);
+  }
+
+  return resultArray;
+}
+const entries = [
+  { mark: 'A', date: new Date('2021-01-01') },
+  { mark: 'B', date: new Date('2022-02-02') },
+  { mark: 'A', date: new Date('2022-03-03') },
+  { mark: 'C', date: new Date('2023-04-04') },
+  { mark: 'B', date: new Date('2023-05-05') },
+];
+console.log(entries);
+const uniqueEntries = getUniqueEntriesWithOldest(entries);
+console.log(uniqueEntries);
+
+    </script>
+</body>
+</html>
